@@ -10,8 +10,6 @@ KERNEL_DIR=$(pwd)
 sharif=`find / -type d -name "clang" 2>/dev/null`
 export PATH="$sharif/clang/bin:$PATH"
 export ARCH=arm64
-export KBUILD_BUILD_HOST=circleci
-export KBUILD_BUILD_USER="Shridhan"
 # sticker plox
 function sticker() {
     curl -s -X POST "https://api.telegram.org/bot$token/sendSticker" \
