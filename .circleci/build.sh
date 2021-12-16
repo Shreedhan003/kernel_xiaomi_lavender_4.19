@@ -7,8 +7,10 @@ IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +"%F-%S")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
-sharif=`find / -type d -name "clang" 2>/dev/null`
-export PATH="$sharif/clang/bin:$PATH"
+PATH="${KERNEL_DIR}/clang/bin:${KERNEL_DIR}/clang/aarch64-linux-gnu/bin:${KERNEL_DIR}/clang/arm-linux-gnueabi/bin:${PATH}"
+export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
+export KBUILD_BUILD_HOST=circleci
+export KBUILD_BUILD_USER="shridhan"
 export ARCH=arm64
 # sticker plox
 function sticker() {
