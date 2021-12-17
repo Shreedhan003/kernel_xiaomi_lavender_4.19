@@ -7,7 +7,7 @@ IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +"%F-%S")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
-PATH="${KERNEL_DIR}/clang/bin:${KERNEL_DIR}/clang/bin:${KERNEL_DIR}/clang/bin:${PATH}"
+PATH="$HOME/clang/bin:${PATH}"
 export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
 export ARCH=arm64
 export KBUILD_BUILD_HOST=circleci
@@ -51,9 +51,8 @@ function compile() {
     make -j$(nproc --all) O=out \
                     ARCH=arm64 \
                     CC=clang \
-                    CLANG_TRIPLE=aarch64-linux-gnu- \
                     CROSS_COMPILE=aarch64-linux-android- \
-                    CROSS_COMPILE_ARM32=arm-linux-androideabi-
+                    CROSS_COMPILE_COMPAT=arm-linux-androideabi-
 
     if ! [ -a "$IMAGE" ]; then
         finerr
