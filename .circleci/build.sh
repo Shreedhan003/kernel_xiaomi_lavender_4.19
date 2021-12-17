@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 echo "Cloning dependencies"
 git clone --depth=1 https://github.com/Shreedhan003/proton-clang.git clang
+git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1 gcc
+git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 gcc32
 git clone --depth=1 https://github.com/Shreedhan003/AnyKernel3.git AnyKernel
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +"%F-%S")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
-export PATH="${KERNEL_DIR}/clang/bin:${PATH}"
+PATH="${KERNEL_DIR}/clang/bin:${KERNEL_DIR}/gcc/bin:${KERNEL_DIR}/gcc32/bin:${PATH}"
 export KBUILD_COMPILER_STRING="$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
 export ARCH=arm64
 export KBUILD_BUILD_HOST=circleci
