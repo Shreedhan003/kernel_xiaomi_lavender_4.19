@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/Shreedhan003/proton-clang.git clang
+git clone --depth=1 https://gitlab.com/varunhardgamer/trb_clang.git clang
 git clone https://github.com/sohamxda7/llvm-stable -b gcc64 --depth=1 gcc
 git clone https://github.com/sohamxda7/llvm-stable -b gcc32  --depth=1 gcc32
-git clone --depth=1 https://github.com/sohamxda7/AnyKernel3 AnyKernel
+git clone --depth=1 https://github.com/Shreedhan003/AnyKernel3.git AnyKernel
 echo "Done"
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +"%F-%S")
@@ -17,7 +17,7 @@ export KBUILD_BUILD_USER="shridhan"
 # sticker plox
 function sticker() {
     curl -s -X POST "https://api.telegram.org/bot$token/sendSticker" \
-        -d sticker="CAACAgEAAxkBAAEnKnJfZOFzBnwC3cPwiirjZdgTMBMLRAACugEAAkVfBy-aN927wS5blhsE" \
+        -d sticker="CAACAgEAAxkBAAEDdzthtZ4zC7lmavk5slORixgAAWJ6TUIAAqgBAAI3kMBHHc2t-Bef-s0jBA" \
         -d chat_id=$chat_id
 }
 # Send info plox channel
